@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Elvis Odhiambo - ICT Student, Web Developer and Tech Enthusiast">
+    <title>Elvis Odhiambo | My Portfolio</title>
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- ===== LOADER ===== -->
+    <div id="loader">
+        <div class="loader-content">
+            <div class="loader-logo">Hello</div>
+            <div class="loader-line"></div>
+            <small>welcome to my portfolio</small>
+        </div>
+    </div>
+
+    <!-- ===== SCROLL PROGRESS ===== -->
+    <div id="scroll-progress"></div>
+
+    <!-- ===== BACKGROUND EFFECTS ===== -->
+    <canvas id="code-rain" aria-hidden="true"></canvas>
+    <div class="edge-stream edge-stream--left" aria-hidden="true"></div>
+    <div class="edge-stream edge-stream--right" aria-hidden="true"></div>
+
+    <div class="background-grid"></div>
+    <div class="blob blob-one"></div>
+    <div class="blob blob-two"></div>
+    <div id="particles"></div>
+
+    <!-- ===== CUSTOM CURSOR ===== -->
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="cursor-mid" aria-hidden="true"></div>
+    <div class="cursor-circle" aria-hidden="true"></div>
+
+    <!-- ===== HEADER / NAVIGATION ===== -->
+    <header id="header">
+        <nav>
+            <a href="#home" class="logo">ELVIS<span>.DEV</span></a>
+
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#dashboard" class="nav-link">Dashboard</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main>
+        <!-- HERO -->
+        <section id="home">
+            <div class="hero">
+                <div class="hero-content">
+                    <div class="hello">Hello, I'm</div>
+                    <h1>Elvis <span>Odhiambo</span></h1>
+
+                    <div class="typing-line">
+                        I'm a
+                        <span class="typing" id="typing"></span>
+                        <span class="cursor">|</span>
+                    </div>
+
+                    <p class="hero-description">
+                        I'm an ICT student and aspiring IT professional
+                        passionate about web development, networking,
+                        software development, hardware, databases and
+                        solving real-world problems through technology.
+                    </p>
+
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">
+                            <i class="fas fa-code"></i> View My Projects
+                        </a>
+                        <a href="#contact" class="btn btn-outline">
+                            <i class="fas fa-paper-plane"></i> Contact Me
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hero-image">
+                    <div class="profile-wrapper">
+                        <div class="profile-inner">
+                            <img src="elvis.jpeg" alt="Elvis Odhiambo"
+                                 onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=&quot;height:100%;display:grid;place-items:center;color:#ff4d6d;font-size:5rem;&quot;><i class=&quot;fas fa-user&quot;></i></div>'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DASHBOARD -->
+        <section id="dashboard">
+            <div class="container">
+                <div class="section-heading reveal">
+                    <small>Live Dashboard</small>
+                    <h2>Weather &amp; Calendar</h2>
+                    <p>Real-time weather updates and a live calendar to keep you on track.</p>
+                </div>
+
+                <div class="widgets-grid">
+                    <!-- Weather Widget -->
+                    <div class="widget glass reveal">
+                        <div class="widget-title">
+                            <i class="fas fa-cloud-sun"></i>
+                            Live Weather
+                        </div>
+
+                        <div class="weather-search">
+                            <input type="text" id="cityInput" placeholder="Search city… e.g. Kisumu, Nairobi, London" aria-label="Search city">
+                            <button id="searchWeather" aria-label="Search weather">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+
+                        <div id="weatherContent">
+                            <div class="weather-loading">
+                                <i class="fas fa-spinner"></i>
+                                Loading weather data…
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Calendar Widget -->
+                    <div class="widget glass reveal">
+                        <div class="widget-title">
+                            <i class="fas fa-calendar-alt"></i>
+                            Live Calendar
+                        </div>
+
+                        <div class="calendar-header">
+                            <div class="calendar-month" id="calendarMonth">Month Year</div>
+                            <div class="calendar-nav">
+                                <button id="prevMonth" aria-label="Previous month">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <button id="nextMonth" aria-label="Next month">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="calendar-grid" id="calendarGrid"></div>
+
+                        <div class="digital-clock">
+                            <div class="clock-time" id="clockTime">--:--:--</div>
+                            <div class="clock-date" id="clockDate">Loading date…</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section id="about">
+            <div class="container">
+                <div class="section-heading reveal">
+                    <small>About Me</small>
+                    <h2>Who I Am</h2>
+                    <p>A technology enthusiast building skills for the future.</p>
+                </div>
+
+                <div class="about-grid">
+                    <div class="about-card glass reveal">
+                        <h3>ICT Student &amp; Future IT Professional</h3>
+                        <p>
+                            My name is <strong>Elvis Odhiambo</strong>, an ICT student
+                            and aspiring IT professional with a strong
+                            interest in web development, networking,
+                            software development, computer hardware,
+                            databases and emerging technologies.
+                        </p>
+                        <br>
+                        <p>
+                            I enjoy learning new technologies,
+                            developing useful applications and
+                            solving technical problems.
+                        </p>
+                    </div>
+
+                    <div class="about-card glass reveal">
+                        <h3>My Focus</h3>
+                        <div class="stats">
+                            <div class="stat">
+                                <i class="fas fa-graduation-cap"></i>
+                                <strong>ICT Student</strong>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-code"></i>
+                                <strong>Web Developer</strong>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-microchip"></i>
+                                <strong>Tech Enthusiast</strong>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-lightbulb"></i>
+                                <strong>Problem Solver</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS -->
+        <section id="skills">
+            <div class="container">
+                <div class="section-heading reveal">
+                    <small>My Skills</small>
+                    <h2>Technical Skills</h2>
+                    <p>Technologies and areas I am developing expertise in.</p>
+                </div>
+
+                <div class="skills-grid">
+                    <div class="skill-card glass reveal icon-html">
+                        <div class="skill-icon-wrap">
+                            <div class="skill-orbit"><span></span><span></span></div>
+                            <div class="skill-icon"><i class="fab fa-html5"></i></div>
+                        </div>
+                        <h3>HTML</h3>
+                        <p>Building semantic and responsive web structures.</p>
+                        <div class="skill-bar"><div class="skill-fill" data-width="90%"></div></div>
+                        <div class="skill-percent"><span>HTML</span><span>90%</span></div>
+                    </div>
+
+                    <div class="skill-card glass reveal icon-css">
+                        <div class="skill-icon-wrap">
+                            <div class="skill-orbit"><span></span><span></span></div>
+                            <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
+                        </div>
+                        <h3>CSS</h3>
+                        <p>Designing modern responsive interfaces.</p>
+                        <div class="skill-bar"><div class="skill-fill" data-width="85%"></div></div>
+                        <div class="skill-percent"><span>CSS</span><span>85%</span></div>
+                    </div>
+
+                    <div class="skill-card glass reveal icon-js">
+                        <div class="skill-icon-wrap">
+                            <div class="skill-orbit"><span></span><span></span></div>
+                            <div class="skill-icon"><i class="fab fa-js"></i></div>
+                        </div>
+                        <h3>JavaScript</h3>
+                        <p>Creating interactive web experiences.</p>
+                        <div class="skill-bar"><div class="skill-fill" data-width="75%"></div></div>
+                        <div class="skill-percent"><span>JavaScript</span><span>75%</span></div>
+                    </div>
+
+                    <div class="skill-card glass reveal icon-network">
+                        <div class="skill-icon-wrap">
+                            <div class="skill-orbit"><span></span><span></span></div>
+                            <div class="skill-icon"><i class="fas fa-network-wired"></i></div>
+                        </div>
+                        <h3>Networking</h3>
+                        <p>Network design, configuration and troubleshooting.</p>
+                        <div class="skill-bar"><div class="skill-fill" data-width="80%"></div></div>
+                        <div class="skill-percent"><span>Networking</span><span>80%</span></div>
+                    </div>
+
+                    <div class="skill-card glass reveal icon-hardware">
+                        <div class="skill-icon-wrap">
+                            <div class="skill-orbit"><span></span><span></span></div>
+                            <div class="skill-icon"><i class="fas fa-screwdriver-wrench"></i></div>
+                        </div>
+                        <h3>Hardware</h3>
+                        <p>Computer repair and hardware troubleshooting.</p>
+                        <div class="skill-bar"><div class="skill-fill" data-width="80%"></div></div>
+                        <div class="skill-percent"><span>Hardware</span><span>80%</span></div>
+                    </div>
+
+                    <div class="skill-card glass reveal icon-database">
+                        <div class="skill-icon-wrap">
+                            <div class="skill-orbit"><span></span><span></span></div>
+                            <div class="skill-icon"><i class="fas fa-database"></i></div>
+                        </div>
+                        <h3>Database / SQL</h3>
+                        <p>Database design and SQL operations.</p>
+                        <div class="skill-bar"><div class="skill-fill" data-width="75%"></div></div>
+                        <div class="skill-percent"><span>Database</span><span>75%</span></div>
+                    </div>
+
+                    <div class="skill-card glass reveal icon-git">
+                        <div class="skill-icon-wrap">
+                            <div class="skill-orbit"><span></span><span></span></div>
+                            <div class="skill-icon"><i class="fab fa-github"></i></div>
+                        </div>
+                        <h3>Git &amp; GitHub</h3>
+                        <p>Version control and project management.</p>
+                        <div class="skill-bar"><div class="skill-fill" data-width="70%"></div></div>
+                        <div class="skill-percent"><span>Git</span><span>70%</span></div>
+                    </div>
+
+                    <div class="skill-card glass reveal icon-office">
+                        <div class="skill-icon-wrap">
+                            <div class="skill-orbit"><span></span><span></span></div>
+                            <div class="skill-icon"><i class="fab fa-microsoft"></i></div>
+                        </div>
+                        <h3>Microsoft Office</h3>
+                        <p>Word, Excel, PowerPoint and productivity tools.</p>
+                        <div class="skill-bar"><div class="skill-fill" data-width="90%"></div></div>
+                        <div class="skill-percent"><span>Office</span><span>90%</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section id="projects">
+            <div class="container">
+                <div class="section-heading reveal">
+                    <small>My Work</small>
+                    <h2>Featured Projects</h2>
+                    <p>Click any project to try the live demo.</p>
+                </div>
+
+                <div class="filters reveal">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="web">Web Development</button>
+                    <button class="filter-btn" data-filter="javascript">JavaScript</button>
+                    <button class="filter-btn" data-filter="network">Networking</button>
+                    <button class="filter-btn" data-filter="database">Database</button>
+                </div>
+
+                <div class="projects-grid">
+                    <!-- Weather Website -->
+                    <article class="project-card glass reveal" data-category="web" data-project="weather" tabindex="0" role="button" aria-label="Try the Weather Website live demo">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?q=80&w=800&auto=format&fit=crop" alt="Weather Website Preview" class="project-img">
+                            <span class="project-live" aria-hidden="true"></span>
+                            <div class="project-icon"><i class="fas fa-cloud-sun"></i></div>
+                            <div class="project-overlay">
+                                <button class="btn btn-primary view-project" data-project="weather" type="button">
+                                    <i class="fas fa-play"></i> Try Live Demo
+                                </button>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>Weather Website</h3>
+                            <p>A responsive weather application that displays real-time weather information using a weather API.</p>
+                            <div class="tags">
+                                <span class="tag">HTML</span>
+                                <span class="tag">CSS</span>
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">API</span>
+                            </div>
+                            <div class="project-actions">
+                                <button class="btn btn-outline small-btn view-project" data-project="weather" type="button" onclick="event.stopPropagation()">
+                                    <i class="fas fa-play"></i> Live Demo
+                                </button>
+                                <a href="#" class="btn btn-outline small-btn" onclick="event.stopPropagation()">
+                                    <i class="fab fa-github"></i> GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Snake Game -->
+                    <article class="project-card glass reveal" data-category="javascript" data-project="game" tabindex="0" role="button" aria-label="Play the Snake Game live demo">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800&auto=format&fit=crop" alt="Snake Game Preview" class="project-img">
+                            <span class="project-live" aria-hidden="true"></span>
+                            <div class="project-icon"><i class="fas fa-gamepad"></i></div>
+                            <div class="project-overlay">
+                                <button class="btn btn-primary view-project" data-project="game" type="button">
+                                    <i class="fas fa-play"></i> Play Snake Game
+                                </button>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>JavaScript Game Website</h3>
+                            <p>An interactive browser-based Snake game developed using JavaScript and HTML5 Canvas.</p>
+                            <div class="tags">
+                                <span class="tag">HTML</span>
+                                <span class="tag">CSS</span>
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">Canvas</span>
+                            </div>
+                            <div class="project-actions">
+                                <button class="btn btn-outline small-btn view-project" data-project="game" type="button" onclick="event.stopPropagation()">
+                                    <i class="fas fa-play"></i> Play Game
+                                </button>
+                                <a href="#" class="btn btn-outline small-btn" onclick="event.stopPropagation()">
+                                    <i class="fab fa-github"></i> GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Network Design -->
+                    <article class="project-card glass reveal" data-category="network" data-project="network" tabindex="0" role="button" aria-label="View the Network Design diagram">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=800&auto=format&fit=crop" alt="Network Design Preview" class="project-img">
+                            <span class="project-live" aria-hidden="true"></span>
+                            <div class="project-icon"><i class="fas fa-network-wired"></i></div>
+                            <div class="project-overlay">
+                                <button class="btn btn-primary view-project" data-project="network" type="button">
+                                    <i class="fas fa-play"></i> View Diagram
+                                </button>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>Polytechnic Network Design</h3>
+                            <p>A secure campus network topology designed for a polytechnic environment using Cisco Packet Tracer.</p>
+                            <div class="tags">
+                                <span class="tag">Cisco</span>
+                                <span class="tag">Networking</span>
+                                <span class="tag">VLANs</span>
+                                <span class="tag">Routing</span>
+                            </div>
+                            <div class="project-actions">
+                                <button class="btn btn-outline small-btn view-project" data-project="network" type="button" onclick="event.stopPropagation()">
+                                    <i class="fas fa-play"></i> View Diagram
+                                </button>
+                                <a href="#" class="btn btn-outline small-btn" onclick="event.stopPropagation()">
+                                    <i class="fab fa-github"></i> GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Database Projects -->
+                    <article class="project-card glass reveal" data-category="database" data-project="database" tabindex="0" role="button" aria-label="Try the Database query demo">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop" alt="Database Project Preview" class="project-img">
+                            <span class="project-live" aria-hidden="true"></span>
+                            <div class="project-icon"><i class="fas fa-database"></i></div>
+                            <div class="project-overlay">
+                                <button class="btn btn-primary view-project" data-project="database" type="button">
+                                    <i class="fas fa-play"></i> Run Queries
+                                </button> 
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>Database Projects</h3>
+                            <p>Database projects involving student records, inventory management and SQL operations.</p>
+                            <div class="tags">
+                                <span class="tag">SQL</span>
+                                <span class="tag">Database</span>
+                                <span class="tag">MS Access</span>
+                            </div>
+                            <div class="project-actions">
+                                <button class="btn btn-outline small-btn view-project" data-project="database" type="button" onclick="event.stopPropagation()">
+                                    <i class="fas fa-play"></i> Run Queries
+                                </button>
+                                <a href="#" class="btn btn-outline small-btn" onclick="event.stopPropagation()">
+                                    <i class="fab fa-github"></i> GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- EDUCATION -->
+        <section id="education">
+            <div class="container">
+                <div class="section-heading reveal">
+                    <small>My Journey</small>
+                    <h2>Education &amp; Experience</h2>
+                    <p>My academic and professional development.</p>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card glass">
+                            <span>Current</span>
+                            <h3>Kisumu National Polytechnic</h3>
+                            <p>ICT Program</p>
+                            <p>Developing skills in web development, networking, databases, computer hardware and software.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card glass">
+                            <span>Future</span>
+                            <h3>Professional Certifications</h3>
+                            <p>This section can be updated with future certifications and achievements.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card glass">
+                            <span>Future</span>
+                            <h3>IT Career</h3>
+                            <p>Building a career as a highly skilled IT professional and web developer.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section id="services">
+            <div class="container">
+                <div class="section-heading reveal">
+                    <small>What I Do</small>
+                    <h2>Services &amp; Interests</h2>
+                </div>
+
+                <div class="services-grid">
+                    <div class="service-card glass reveal">
+                        <i class="fas fa-code"></i>
+                        <h3>Web Development</h3>
+                        <p>Building responsive and interactive websites using modern web technologies.</p>
+                    </div>
+                    <div class="service-card glass reveal">
+                        <i class="fas fa-palette"></i>
+                        <h3>Website Design</h3>
+                        <p>Creating clean, attractive and user-friendly website interfaces.</p>
+                    </div>
+                    <div class="service-card glass reveal">
+                        <i class="fas fa-network-wired"></i>
+                        <h3>Network Design</h3>
+                        <p>Designing and understanding secure computer network infrastructures.</p>
+                    </div>
+                    <div class="service-card glass reveal">
+                        <i class="fas fa-screwdriver-wrench"></i>
+                        <h3>Hardware &amp; Repair</h3>
+                        <p>Computer maintenance, hardware repair and troubleshooting.</p>
+                    </div>
+                    <div class="service-card glass reveal">
+                        <i class="fas fa-database"></i>
+                        <h3>Database Development</h3>
+                        <p>Creating and managing structured database systems.</p>
+                    </div>
+                    <div class="service-card glass reveal">
+                        <i class="fas fa-headset"></i>
+                        <h3>Technical Support</h3>
+                        <p>Helping users solve computer and technology-related problems.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact">
+            <div class="container">
+                <div class="section-heading reveal">
+                    <small>Get In Touch</small>
+                    <h2>Contact Me</h2>
+                    <p>Have a project, question or opportunity? Let's connect.</p>
+                </div>
+
+                <div class="contact-grid">
+                    <div class="contact-info glass reveal">
+                        <h3>Let's Talk</h3>
+                        <p>I'm open to discussing web development, technology projects, networking and future opportunities.</p>
+
+                        <div class="contact-detail">
+                            <i class="fas fa-user"></i>
+                            <div>
+                                <strong>Elvis Odhiambo</strong>
+                                <small>ICT Student &amp; Web Developer</small>
+                            </div>
+                        </div>
+
+                        <div class="contact-detail">
+                            <i class="fas fa-location-dot"></i>
+                            <div>
+                                <strong>Location</strong>
+                                <small>Kenya</small>
+                            </div>
+                        </div>
+
+                        <div class="socials">
+                            <a href="https://github.com/elvisodhiambo" class="social-github" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                            <a href="https://linkedin.com/in/elvisodhiambo" class="social-linkedin" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://facebook.com/elvisodhiambo" class="social-facebook" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://instagram.com/elvisodhiambo" class="social-instagram" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/254758325179" class="social-whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="contact-form glass reveal">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" placeholder="Your name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" placeholder="your@email.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" placeholder="Project subject">
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" placeholder="Write your message..."></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane"></i> Send Message
+                            </button>
+
+                            <div id="formMessage" class="form-message"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="footer-socials">
+            <a href="https://github.com/elvisodhiambo" class="socials social-github" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/elvisodhiambo" class="socials social-linkedin" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://facebook.com/elvisodhiambo" class="socials social-facebook" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://instagram.com/elvisodhiambo" class="socials social-instagram" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/254758325179" class="socials social-whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+
+        <p>© 2026 Elvis Odhiambo. All Rights Reserved.</p>
+    </footer>
+
+    <!-- ===== BACK TO TOP ===== -->
+    <button id="backTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- ===== PROJECT MODAL ===== -->
+    <div class="modal" id="projectModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-box">
+            <button class="modal-close" id="modalClose" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <h2 id="modalTitle">Project Title</h2>
+            <p id="modalDescription">Project description.</p>
+
+            <div class="modal-tabs" role="tablist">
+                <button class="modal-tab active" data-tab="demo" role="tab" aria-selected="true">
+                    <i class="fas fa-play"></i> Live Demo
+                </button>
+                <button class="modal-tab" data-tab="details" role="tab" aria-selected="false">
+                    <i class="fas fa-info-circle"></i> Details
+                </button>
+            </div>
+
+            <div class="modal-panel active" data-panel="demo" id="demoPanel"></div>
+
+            <div class="modal-panel" data-panel="details">
+                <h3>Technologies Used</h3>
+                <div class="tags" id="modalTags"></div>
+
+                <h3>Key Features</h3>
+                <p id="modalFeatures"></p>
+
+                <div class="project-actions" style="margin-top: 20px;">
+                    <a href="#" id="modalGithub" class="btn btn-outline" target="_blank" rel="noopener">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MAIN SCRIPT ===== -->
+    <script src="script.js"></script>
+</body>
+</html>
